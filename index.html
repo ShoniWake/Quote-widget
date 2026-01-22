@@ -19,15 +19,16 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      text-shadow: 3px 3px 12px rgba(0,0,0,0.9); /* strong glow */
+      text-shadow: 3px 3px 12px rgba(0,0,0,0.9);
       padding: 20px;
       box-sizing: border-box;
+      position: relative;
     }
 
     #quote {
       max-width: 900px;
       position: relative;
-      margin-bottom: 40px;
+      margin-bottom: 60px; /* leave space for button */
       line-height: 1.4;
     }
 
@@ -42,28 +43,40 @@
       vertical-align: bottom;
     }
 
+    /* Small circular refresh button at bottom center */
     #refresh-btn {
       position: absolute;
-      bottom: 20px;
-      font-size: 16px;
-      padding: 8px 12px;
-      cursor: pointer;
+      bottom: 20px; /* distance from bottom */
+      left: 50%; /* center horizontally */
+      transform: translateX(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.4); /* semi-transparent black */
       border: none;
-      background-color: rgba(255,255,255,0.3);
-      color: white;
-      border-radius: 6px;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.2s;
     }
 
     #refresh-btn:hover {
-      background-color: rgba(255,255,255,0.5);
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    /* Refresh icon */
+    #refresh-btn::before {
+      content: "⟳"; /* Unicode refresh symbol */
+      color: white;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
 
 <div id="quote">Loading...</div>
-<button id="refresh-btn">🔄 Refresh</button>
+<button id="refresh-btn"></button>
 
 <script>
   const quotes = [
@@ -96,13 +109,11 @@
   // initial load
   setQuoteAndBackground();
 
-  // refresh button
+  // refresh button click
   document.getElementById('refresh-btn').addEventListener('click', () => {
     setQuoteAndBackground();
   });
-
 </script>
 
 </body>
 </html>
-
