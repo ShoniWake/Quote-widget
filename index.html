@@ -4,33 +4,105 @@
   <meta charset="UTF-8">
   <title>Quote Widget</title>
   <style>
-    body {
+    html, body {
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      height: 100%;
+      width: 100%;
       font-family: Georgia, serif;
-      font-style: italic;
-      background: transparent;
-      color: #222;
+      font-size: 24px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-shadow: 3px 3px 12px rgba(0,0,0,0.9); /* strong glow */
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #quote {
+      max-width: 900px;
+      position: relative;
+      margin-bottom: 40px;
+      line-height: 1.4;
+    }
+
+    #quote::before {
+      content: "“";
+      font-size: 40px;
+      vertical-align: top;
+    }
+    #quote::after {
+      content: "”";
+      font-size: 40px;
+      vertical-align: bottom;
+    }
+
+    #refresh-btn {
+      position: absolute;
+      bottom: 20px;
+      font-size: 16px;
+      padding: 8px 12px;
+      cursor: pointer;
+      border: none;
+      background-color: rgba(255,255,255,0.3);
+      color: white;
+      border-radius: 6px;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    }
+
+    #refresh-btn:hover {
+      background-color: rgba(255,255,255,0.5);
     }
   </style>
 </head>
 <body>
 
-<div id="quote"></div>
+<div id="quote">Loading...</div>
+<button id="refresh-btn">🔄 Refresh</button>
 
 <script>
   const quotes = [
-    "The night remembers what the day forgets.",
-    "No crown is heavier than memory.",
-    "Silence is also a kind of inheritance.",
-    "Memory is a second inheritance.",
-    "History survives by being retold."
+    "... a mind needs books as a sword needs a whetstone, if it is to keep its edge.",
+    "Never forget what you are, for surely the world will not. Make it your strength. Then it can never be your weakness. Armour yourself in it, and it will never be used to hurt you.",
+    "Fear cuts deeper than swords.",
+    "Winter is coming.",
+    "When you play a game of thrones you win or you die.",
+    "When the snows fall and the white winds blow, the lone wolf dies but the pack survives."
   ];
 
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  document.getElementById("quote").innerText = quotes[randomIndex];
+  const backgrounds = [
+    "https://64.media.tumblr.com/b52cba3371e8bd5f61e5897581f44ec9/fff454f19c0e22aa-a9/s1280x1920/f0e84453ebe47dcf414de1e69a5db7bec816d083.jpg",
+    "https://64.media.tumblr.com/63f2a52827d8c503f07b5c694567df16/fff454f19c0e22aa-e0/s1280x1920/7cec75bdefdbca1ae1f608407e8d95c5119928f5.jpg",
+    "https://64.media.tumblr.com/c971bf723f2e51a4788c697e7c097cc4/c48f293174c3efed-2c/s640x960/7c21e2094d5aba46b26b16d34ef65845c364da98.jpg",
+    "https://64.media.tumblr.com/7a73af3d6f259bbae58f6a865533d337/c48f293174c3efed-e2/s1280x1920/49c01b5b51b28dd09408f19848f5d51e6f81be61.jpg"
+  ];
+
+  function getRandomIndex(arr) {
+    return Math.floor(Math.random() * arr.length);
+  }
+
+  function setQuoteAndBackground() {
+    const quoteIndex = getRandomIndex(quotes);
+    const bgIndex = getRandomIndex(backgrounds);
+    document.getElementById('quote').innerText = quotes[quoteIndex];
+    document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+  }
+
+  // initial load
+  setQuoteAndBackground();
+
+  // refresh button
+  document.getElementById('refresh-btn').addEventListener('click', () => {
+    setQuoteAndBackground();
+  });
+
 </script>
 
 </body>
 </html>
+
