@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Quote Widget</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Georgia, serif;
+      font-style: italic;
+      background: transparent;
+      color: #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div id="quote"></div>
+
+<script>
+  const quotes = [
+    "The night remembers what the day forgets.",
+    "No crown is heavier than memory.",
+    "Silence is also a kind of inheritance.",
+    "Memory is a second inheritance.",
+    "History survives by being retold."
+  ];
+
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  document.getElementById("quote").innerText = quotes[randomIndex];
+</script>
+
+</body>
+</html>
